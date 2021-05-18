@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% load myapp_extras %}
+
+	
+		<!-- <form method="get">
+			{{myFilter.form}} -->
+		
+	<form method="get">
+		<!-- <div class="btn-group">
+			 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button> -->
+
+		<!-- <div class = "dropdown-menu">
+			<form class="px-4 py-3">
+				<div class="form-group"> -->
+		<div class="card">
+  <div class="card-body">
+		<!-- 	<div class="form-group col-sm-10"> -->
+		{{ filtered_device.form.as_table }}
+		<div class="container">
+ 	
+		<button type="submit" class="btn btn-info btn-sm" name="button"> Применить фильтр </button>
+	</div>
+</div>
+</div>
+
+
+<!-- </div> -->
+
+
+	</form>
+
+<div class="card" style="width: 80rem;">
+  <div class="card-header">
+    Техника ЛЦ
+  </div>
+
+<div class="card-body">
+	<blockquote class="blockquote mb-0">
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th> Номер </th>
+			<th> Тип </th>
+			<th> Имя устр-ва </th>
+			<th> Серийный номер </th>
+			<th> МВЗ </th>
+			<th> Статус устр-ва </th>
+			<th> Цена </th>
+			<th> Дата пост. </th>
+			<th> Заметки </th>
+			<th> Изменить хар-ки </th>
+			<th> Изменить статус </th>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		{% for item in device_page_obj %}
+
+		<tr>
+			<td>{{ item.id_Device_on_Table }} </td>
+			<td>{{ item.type_device }} </td>
+			<td>{{ item.number_PC_ID }} </td>
+			<td>{{ item.serial_number_device }} </td>
+			<td>{{ item.MVZ_Device }} </td>
+			<td>{{ item.status_devices }} </td>
+			<td>{{ item.price }} </td>
+			<td>{{ item.date_postavki }} </td>
+			<td>{{ item.primechanie }} </td>
+			
+
+
+			<td>
+				<a href="{% url 'edit_device' item.pk %}" class="btn btn-warning btn-sm" role="button"> Edit </a>
+			
+			</td>
+			<td> 
+				<a href="{% url 'go_to_remont' item.pk %}" class="btn btn-danger btn-sm" role="button"> Изменить статус </a>
+				
+			</td>
+			<!-- <td> 
+				<a href="" class="btn btn-success btn-sm" role="button"> ИЗ ремонта </a>
+				
+			</td> -->
+
+		</tr>
+
+
+		{% endfor %}
+
+	</tbody>
+
+	<div>
+		<span class="step-links">
+			{% if device_page_obj.has_previous %}
+				<a href="{% my_url 1 'page' request.GET.urlencode %}">&laquo; First</a>
+				<a href="{% my_url device_page_obj.previous_page_number 'page' request.GET.urlencode %}">Previous</a>
+				{% endif %}
+
+				<span class="current">
+					Page {{device_page_obj.number}} of {{device_page_obj.paginator.num_pages}}
+
+
+				</span>
+
+
+				{% if device_page_obj.has_next %}
+					<a href="{% my_url device_page_obj.next_page_number 'page' request.GET.urlencode %}"> Next</a>
+					<a href="{% my_url device_page_obj.paginator.num_pages 'page' request.GET.urlencode %}" >&raquo; Last</a>
+
+				{% endif %}
+
+		</span>
+
+	</div>
+	</blockquote>
+
+	  </div>
+</div>
+
+
+{% endblock %}

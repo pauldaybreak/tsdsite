@@ -1,0 +1,133 @@
+<html>
+	
+	<head>
+	<title> Invertory </title>
+
+	</head>
+
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static '/css/style.css' %}">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css '%}">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+<style>
+	#hello-msg{
+		font-size: 20px;
+		color: #fff;
+		margin-right: 100px;
+
+
+	}
+
+  #excel_button{
+    margin-right: 100px
+  }
+</style>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Техника ЛЦ</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      
+     
+      
+
+      <li>
+
+      	<button type="button" class="btn btn-outline-info" aria-disabled="true">Hello, {{request.user}}</button>
+      	<!-- <span class="hello-msg"></span> -->
+      	
+		<!-- <span class="hello-msg"><a href="{% url 'logout_user' %}"> Logout </a></span> -->
+
+		<button type="button" class="btn btn-light"><a href="{% url 'logout_user' %}"> Logout </a></button>
+
+    <button type="button" class="btn btn-success"><a href="{% url 'export_excel' %}" style="color: white"> Экспорт в XLS </a></button>
+
+    
+
+  <!-- Example single danger button -->
+
+
+    <!-- <button type="button" class="btn btn-info"><a href="{% url 'display_devices' %}" style="color: white"> Все устр-ва </a></button> -->
+
+
+
+     
+    </ul>
+
+<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Все устр-ва
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'display_devices' %}">Показать всё</a></li>
+            <li><a class="dropdown-item" href="{% url 'add_device' %}">Добавить устр-во</a></li>
+          </ul>
+        </li>
+      </ul>
+   
+
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Показать
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'display_tsd' %}">ТСД</a></li>
+            <li><a class="dropdown-item" href="{% url 'display_techniks' %}">Техника склада</a></li>
+            <!-- <li><a class="dropdown-item" href="{}">Компьютеры</a></li> -->
+
+          </ul>
+        </li>
+      </ul>
+      <a href="{% url 'display_repair' %}" button type="button" class="btn btn-outline-warning">РЕМОНТ </button>
+      <a href="{% url 'add_repair' %}" button type="button" class="btn btn-outline-warning"> + </a>   </a>
+      <a href="#" button type="button" class="btn btn-outline-light">РАСХОДНИКИ </button>
+      <a href="#" button type="button" class="btn btn-outline-light"> + </a>   </a>
+
+    </div>
+
+ </div>
+
+
+    
+</div>
+    <form class="form-inline my-2 my-lg-0">
+      <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div class="container">
+<!-- 
+  <form method="get">
+    {{myFilter}} -->
+    
+<br>
+<br>
+
+
+	{% block body %}
+
+
+
+	{% endblock %}
+	
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method='get'>
+	{{filter.form.as_p}}
+	<button type="submit">Search</button>
+</form>
+<ul>
+	{% for whdevice in WHDevice_list %}
+		<li> {{whdevice.type_devices}} - {{whdevice.type_devices}} </li>
+{% endfor %}
+</ul>
+{% endblock %}

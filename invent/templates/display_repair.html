@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% load myapp_extras %}
+
+<form method="get">
+		<div class="card">
+  <div class="card-body">
+		
+		{{ filtered_repair.form.as_table }}
+		<div class="container">
+ 	
+		<button type="submit" class="btn btn-info btn-sm" name="button"> Применить фильтр </button>
+	</div>
+</div>
+</div>
+
+
+<!-- </div> -->
+
+
+	</form>
+
+<div class="card" style="width: 80rem;">
+  <div class="card-header">
+    Ремонт техники ЛЦ
+  </div>
+
+<div class="card-body">
+	<blockquote class="blockquote mb-0">
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th> Номер </th>
+			<th> Имя устр-ва </th>
+			<th> Имя устр-ва </th>
+			<th> #Акта ремонта </th>
+			<th> Имя фирмы </th>
+			<th> Статус </th>
+			<th> Стоимость руб. </th>
+			<th> Дата в ремонт </th>
+			<th> Дата из ремонта </th>
+			<th> Заметки </th>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		{% for ite in repair_page_obj %}
+
+		<tr>
+			<td>{{ ite.id_Repair }} </td>
+			<td>{{ ite.id_Device_on_repair }} </td>
+			<td>{{ ite.number_PC_ID_repair }} </td>
+			<td>{{ ite.number_repair }} </td>
+			<td>{{ ite.firm_repair }} </td>
+			<td>{{ ite.status_repair }} </td>
+			<td>{{ ite.cost_repair }} </td>
+			<td>{{ ite.date_v_remont }} </td>
+			<td>{{ ite.date_iz_remonta }} </td>
+			<td>{{ ite.primechanie }} </td>
+			
+			
+			<td>
+				<a href="{% url 'edit_repair' ite.pk %}" class="btn btn-warning btn-sm" role="button"> Edit </a>
+			
+		</td>
+			<!-- <td> 
+				<a href="{% url 'go_to_remont' ite.pk %}" class="btn btn-danger btn-sm" role="button"> Изменить статус </a>
+				
+			</td> -->
+			<!-- <td> 
+				<a href="" class="btn btn-success btn-sm" role="button"> ИЗ ремонта </a>
+				
+			</td> -->
+
+		</tr>
+
+
+		{% endfor %}
+
+	</tbody>
+
+	<div>
+		<span class="step-links">
+			{% if repair_page_obj.has_previous %}
+				<a href="{% my_url 1 'page' request.GET.urlencode %}">&laquo; First </a>
+				<a href="{% my_url repair_page_obj.previous_page_number 'page' request.GET.urlencode %}">Previous</a>
+				{% endif %}
+
+				<span class="current">
+					Page {{repair_page_obj.number}} of {{repair_page_obj.paginator.num_pages}}
+
+
+				</span>
+
+
+				{% if repair_page_obj.has_next %}
+					<a href="{% my_url repair_page_obj.next_page_number 'page' request.GET.urlencode %}"> Next</a>
+					<a href="{% my_url repair_page_obj.paginator.num_pages 'page' request.GET.urlencode %}" >&raquo; Last</a>
+
+				{% endif %}
+
+		</span>
+
+	</div>
+	</blockquote>
+
+	  </div>
+</div>
+
+
+{% endblock %}
